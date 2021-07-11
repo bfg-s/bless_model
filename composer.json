@@ -1,5 +1,6 @@
 {
     "name": "bfg/bless_model",
+    "type": "bfg-app",
     "description": "Recursive auto save eloquent Models",
     "keywords": [
         "laravel",
