@@ -1,0 +1,1 @@
+<?phpnamespace Bfg\BlessModel;use Illuminate\Support\Collection;/** * Class LevyModelCollection * @package Bfg\BlessModel */class LevyModelCollection extends Collection{}

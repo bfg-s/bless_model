@@ -1,0 +1,57 @@
+{
+    "name": "bfg/bless_model",
+    "description": "Recursive auto save eloquent Models",
+    "keywords": [
+        "laravel",
+        "recursive",
+        "save",
+        "update",
+        "bfg",
+        "eloquent",
+        "models",
+        "model"
+    ],
+    "homepage": "https://github.com/bfg/bless_model",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bfg",
+            "email": "bfg.script@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.0"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Bfg\\BlessModel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+
+        }
+    },
+    "scripts": {
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bfg\\BlessModel\\ServiceProvider"
+            ],
+            "aliases": {
+                "BlessModel": "Bfg\\BlessModel\\Facade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

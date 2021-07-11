@@ -1,0 +1,1 @@
+<?phpnamespace Bfg\BlessModel\Core;use Bfg\BlessModel\LevyModel;/** * Class SaveCore * @package Bfg\BlessModel\Core */class SaveCore{    /**     * SaveCore constructor.     * @param  LevyModel  $levy     */    public function __construct(        protected LevyModel $levy    ){}}
