@@ -22,6 +22,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "bfg/installer": "*",
         "illuminate/contracts": "^8.0"
     },
     "require-dev": {
