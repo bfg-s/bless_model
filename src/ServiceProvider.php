@@ -14,12 +14,6 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 class ServiceProvider extends InstalledProvider
 {
     /**
-     * The name of extension.
-     * @var string|null
-     */
-    public ?string $name = "bfg/bless_model";
-
-    /**
      * The description of extension.
      * @var string|null
      */
