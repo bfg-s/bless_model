@@ -25,7 +25,7 @@ class PreparingDataForWritingDependenciesPipe
 
                 if (isset($model->put_data[$name])) {
 
-                    if ($this->is_assoc($model->put_data[$name])) {
+                    if (is_assoc($model->put_data[$name])) {
 
                         $model->write_relations_data[$name] =
                             \BlessModel::makeLevy($model_relation, $model->put_data[$name]);
@@ -35,7 +35,7 @@ class PreparingDataForWritingDependenciesPipe
                         $model->write_relations_data[$name] =
                             (new LevyModelCollection($model->put_data[$name]))
                                 ->filter(fn ($i) => is_array($i))
-                                ->filter(fn ($i) => $this->is_assoc($i))
+                                ->filter(fn ($i) => is_assoc($i))
                                 ->map(fn (array $data) => \BlessModel::makeLevy($model_relation, $data));
                     }
                 }
@@ -43,15 +43,5 @@ class PreparingDataForWritingDependenciesPipe
         }
 
         return $next($model);
-    }
-
-    /**
-     * @param  array  $arr
-     * @return bool
-     */
-    protected function is_assoc(array $arr): bool
-    {
-        if ([] === $arr) return false;
-        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 }
