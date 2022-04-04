@@ -1,20 +1,17 @@
 <?php
 
-namespace Bfg\BlessModel;
+namespace Bfg\BlessModel\Facades;
 
+use Bfg\BlessModel\BlessModel as BlessModelAccess;
 use Illuminate\Support\Facades\Facade as FacadeIlluminate;
 
-/**
- * Class Facade
- * @package Bfg\BlessModel
- */
-class Facade extends FacadeIlluminate
+class BlessModel extends FacadeIlluminate
 {
     /**
      * @return string
      */
     protected static function getFacadeAccessor()
     {
-        return BlessModel::class;
+        return BlessModelAccess::class;
     }
 }

@@ -20,6 +20,8 @@ class PreparingDataForWritingPipe
 
         if ($model->model_class && $model->model_table) {
 
+            $model->input_keys = array_keys($model->put_data);
+
             foreach ($model->fields as $field) {
                 if (array_key_exists($field, $model->put_data)) {
                     if ($model->put_data[$field] !== '') {
