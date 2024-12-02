@@ -33,13 +33,36 @@ class DefiningTableFieldsPipe
 
             } else {
 
-                $fields = \DB::select(
-                    "SELECT COL.COLUMN_NAME, COL.IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS COL WHERE COL.TABLE_NAME = '{$model->model_table}'"
-                );
+                if (property_exists($model->src, 'nullables')) {
 
-                foreach ($fields as $field) {
+                    $result = $model->src->nullables;
 
-                    $model->nullable_fields[$field->COLUMN_NAME] = $field->IS_NULLABLE === 'YES';
+                    if (is_array($result)) {
+
+                        $model->nullable_fields = array_merge($model->nullable_fields, $result);
+                    }
+                }
+
+                if (method_exists($model->src, 'nullables')) {
+
+                    $result = $model->src->nullables();
+
+                    if (is_array($result)) {
+
+                        $model->nullable_fields = array_merge($model->nullable_fields, $result);
+                    }
+                }
+
+                if (! $model->nullable_fields) {
+
+                    $fields = \DB::select(
+                        "SELECT COL.COLUMN_NAME, COL.IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS COL WHERE COL.TABLE_NAME = '{$model->model_table}'"
+                    );
+
+                    foreach ($fields as $field) {
+
+                        $model->nullable_fields[$field->COLUMN_NAME] = $field->IS_NULLABLE === 'YES';
+                    }
                 }
 
                 static::$cache_fields[$model->model_table]['nullable_fields'] = $model->nullable_fields;
