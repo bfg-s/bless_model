@@ -73,7 +73,10 @@ class DefiningTableFieldsPipe
 
                 static::$cache_fields[$model->model_table]['nullable_fields'] = $model->nullable_fields;
 
-                static::$cache_fields[$model->model_table]['fields'] = $model->fields = array_keys($model->nullable_fields);
+                static::$cache_fields[$model->model_table]['fields'] = $model->fields = array_merge(
+                    array_keys($model->nullable_fields),
+                    $model->src->getFillable(),
+                );
             }
         }
 
