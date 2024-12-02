@@ -33,6 +33,8 @@ class DefiningTableFieldsPipe
 
             } else {
 
+                $hasNullables = false;
+
                 if (property_exists($model->src, 'nullables')) {
 
                     $result = $model->src->nullables;
@@ -40,6 +42,8 @@ class DefiningTableFieldsPipe
                     if (is_array($result)) {
 
                         $model->nullable_fields = array_merge($model->nullable_fields, $result);
+
+                        $hasNullables = true;
                     }
                 }
 
@@ -50,10 +54,12 @@ class DefiningTableFieldsPipe
                     if (is_array($result)) {
 
                         $model->nullable_fields = array_merge($model->nullable_fields, $result);
+
+                        $hasNullables = true;
                     }
                 }
 
-                if (! $model->nullable_fields) {
+                if (! $hasNullables && ! $model->nullable_fields) {
 
                     $fields = \DB::select(
                         "SELECT COL.COLUMN_NAME, COL.IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS COL WHERE COL.TABLE_NAME = '{$model->model_table}'"
