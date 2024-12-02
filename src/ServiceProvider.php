@@ -4,6 +4,7 @@ namespace Bfg\BlessModel;
 
 use Bfg\BlessModel\ApplyLevy\SaveLevyModelCollectionListener;
 use Bfg\BlessModel\ApplyLevy\SaveLevyModelListener;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
@@ -16,10 +17,10 @@ class ServiceProvider extends IlluminateServiceProvider
      * Register route settings.
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        \Event::listen(LevyModel::class, SaveLevyModelListener::class);
-        \Event::listen(LevyModelCollection::class, SaveLevyModelCollectionListener::class);
+        Event::listen(LevyModel::class, SaveLevyModelListener::class);
+        Event::listen(LevyModelCollection::class, SaveLevyModelCollectionListener::class);
     }
 
     /**

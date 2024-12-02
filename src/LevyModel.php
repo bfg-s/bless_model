@@ -148,13 +148,6 @@ class LevyModel
     public array $write_data = [];
 
     /**
-     * Inner input data keys
-     *
-     * @var array
-     */
-    public array $input_keys = [];
-
-    /**
      * Data for relations writing
      *
      * @var array

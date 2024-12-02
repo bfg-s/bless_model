@@ -38,10 +38,8 @@ class BlessBuilderCore extends EventCore
      * @param  Arrayable|string|array  $data
      * @return LevyModel
      */
-    public function makeLevy(
-        Model|Relation|Builder|string $model,
-        Arrayable|string|array $data
-    ): LevyModel {
+    public function makeLevy(Model|Relation|Builder|string $model, Arrayable|string|array $data): LevyModel
+    {
         return (new Pipeline($this->container))
             ->send(new LevyModel($model, $data))
             ->through([
@@ -61,21 +59,12 @@ class BlessBuilderCore extends EventCore
      * @param  Arrayable|string|array  $data
      * @return LevyModelCollection|LevyModel
      */
-    public function makeLevyCollection(
-        Model|Relation|Builder|string $model,
-        Arrayable|string|array $data
-    ): LevyModelCollection|LevyModel {
-
-        if ($data instanceof Arrayable) {
-            $data = $data->toArray();
-        }
-
-        return is_assoc($data)
-            ? $this->makeLevy($model, $data)
-            : (new LevyModelCollection($data))
-                ->filter(fn ($i) => is_array($i))
-                ->filter(fn ($i) => is_assoc($i))
-                ->map(fn (array $d) => $this->makeLevy($model, $d));
+    public function makeLevyCollection(Model|Relation|Builder|string $model, Arrayable|string|array $data): LevyModelCollection|LevyModel
+    {
+        return is_assoc($data) ? (new LevyModelCollection($data))
+            ->filter(fn ($i) => is_array($i))
+            ->filter(fn ($i) => is_assoc($i))
+            ->map(fn (array $d) => $this->makeLevy($model, $d)) : $this->makeLevy($model, $data);
     }
 
     /**
